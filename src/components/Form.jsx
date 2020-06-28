@@ -23,6 +23,9 @@ const Form = () => {
   return (
     <>
       <form onSubmit={onSubmit}>
+        {error ? (
+          <p className='red darken-4 error'>All inputs are required</p>
+        ) : null}
         <div className='input-field col s12'>
           <input
             type='text'
@@ -49,6 +52,13 @@ const Form = () => {
             <option value='PE'>Peru</option>
           </select>
           <label htmlFor='country'>Country: </label>
+        </div>
+        <div className='input-field col s12'>
+          <input
+            type='submit'
+            value='Search Weather'
+            className='waves-effect waves-light btn-large btn-block yellow accent-4'
+          />
         </div>
       </form>
     </>
