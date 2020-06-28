@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Error from './Error';
-
+import PropTypes from 'prop-types';
 const Form = ({ search, setSearch, setQuery }) => {
   const [error, setError] = useState(false);
   const { city, country } = search;
@@ -60,6 +60,12 @@ const Form = ({ search, setSearch, setQuery }) => {
       </form>
     </>
   );
+};
+
+Form.propTypes = {
+  search: PropTypes.object.isRequired,
+  setSearch: PropTypes.func.isRequired,
+  setQuery: PropTypes.func.isRequired,
 };
 
 export default Form;
