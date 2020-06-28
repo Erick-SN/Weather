@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Error from './Error';
 
 const Form = ({ search, setSearch, setQuery }) => {
   const [error, setError] = useState(false);
@@ -21,9 +22,7 @@ const Form = ({ search, setSearch, setQuery }) => {
   return (
     <>
       <form onSubmit={onSubmit}>
-        {error ? (
-          <p className='red darken-4 error'>All inputs are required</p>
-        ) : null}
+        {error ? <Error message='All inputs are required' /> : null}
         <div className='input-field col s12'>
           <input
             type='text'

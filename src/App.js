@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Form from './components/Form';
 import Weather from './components/Weather';
+import Error from './components/Error';
 function App() {
   const [search, setSearch] = useState({ city: '', country: '' });
   const [query, setQuery] = useState(false);
   const [result, setResult] = useState({});
+  const [error, setError] = useState(false);
   const { city, country } = search;
   useEffect(() => {
     const getData = async () => {
@@ -15,10 +17,17 @@ function App() {
         const response = await fetch(URL).then((res) => res.json());
         setResult(response);
         setQuery(false);
+
+        if (response.cod === '404') {
+          setError(true);
+        } else {
+          setError(false);
+        }
       }
     };
     getData();
   }, [query]);
+
   return (
     <>
       <Header title='Weather app' />
@@ -29,7 +38,11 @@ function App() {
               <Form search={search} setSearch={setSearch} setQuery={setQuery} />
             </div>
             <div className='col m6 s12'>
-              <Weather result={result} />
+              {error ? (
+                <Error message={'No results found'} />
+              ) : (
+                <Weather result={result} />
+              )}
             </div>
           </div>
         </div>
